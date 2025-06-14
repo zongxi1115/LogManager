@@ -1,3 +1,5 @@
 logs/
 .vscode/
 vcpkg/
+*.html
+*.py
