@@ -1,0 +1,10 @@
+^D:\PROJS\AAAAKESHE\BUILD\CMAKEFILES\1AC8017A464864AF460057FB10109A64\GENERATE.STAMP.RULE
+setlocal
+D:\qt\Tools\CMake_64\bin\cmake.exe -SD:/projs/aaaakeshe -BD:/projs/aaaakeshe/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/projs/aaaakeshe/build/my_logger.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

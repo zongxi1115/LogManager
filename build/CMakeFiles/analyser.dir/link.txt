@@ -1,0 +1,3 @@
+D:\qt\Tools\CMake_64\bin\cmake.exe -E rm -f CMakeFiles\analyser.dir/objects.a
+C:\ProgramData\mingw64\mingw64\bin\ar.exe qc CMakeFiles\analyser.dir/objects.a @CMakeFiles\analyser.dir\objects1.rsp
+C:\ProgramData\mingw64\mingw64\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\analyser.dir/objects.a -Wl,--no-whole-archive -o analyser.exe -Wl,--out-implib,libanalyser.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\analyser.dir\linkLibs.rsp

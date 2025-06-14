@@ -1,0 +1,2 @@
+C:\ProgramData\mingw64\mingw64\bin\ar.exe qc liblogger.a CMakeFiles/logger.dir/src/arg_parser.cpp.obj CMakeFiles/logger.dir/src/console_sink.cpp.obj CMakeFiles/logger.dir/src/file_sink.cpp.obj CMakeFiles/logger.dir/src/log_level.cpp.obj CMakeFiles/logger.dir/src/log_manager.cpp.obj CMakeFiles/logger.dir/src/sink.cpp.obj
+C:\ProgramData\mingw64\mingw64\bin\ranlib.exe liblogger.a

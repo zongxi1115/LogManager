@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数智生涯 | AI智能志愿填报与生涯规划平台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --gradient-blue: linear-gradient(90deg, #0ea5e9, #06b6d4);
+            --gradient-purple: linear-gradient(90deg, #8b5cf6, #d946ef);
+            --gradient-green: linear-gradient(90deg, #10b981, #22c55e);
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: url('https://i.ibb.co/xtN61cRf/Comfy-UI-Output-4-1.png') center/cover no-repeat fixed;
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: 240px;
+            gap: 24px;
+            padding: 2rem;
+            max-width: 2400px;
+            margin: 0 auto;
+        }
+        
+        .glass-card {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            padding: 2rem;
+            backdrop-filter: blur(12px);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .highlight-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+        
+        .gradient-blue { background-image: var(--gradient-blue); }
+        .gradient-purple { background-image: var(--gradient-purple); }
+        .gradient-green { background-image: var(--gradient-green); }
+        
+        .big-number {
+            font-size: 5rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+        }
+        
+        .chart-container {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .tech-element {
+            position: absolute;
+            opacity: 0.6;
+            z-index: -1;
+        }
+        
+        .circle-element {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            position: absolute;
+            bottom: -100px;
+            right: -100px;
+        }
+        
+        .grid-element {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px),
+                linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: -1;
+        }
+        
+        @media (max-width: 1024px) {
+            .bento-grid {
+                grid-auto-rows: 200px;
+                gap: 16px;
+                padding: 1rem;
+            }
+            
+            .big-number {
+                font-size: 3.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .bento-grid {
+                grid-template-columns: repeat(1, 1fr);
+                grid-auto-rows: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- SVG Filters -->
+    <svg style="display: none">
+        <filter id="glass-distortion">
+            <feTurbulence type="fractalNoise" baseFrequency="0.01 0.01" numOctaves="1" seed="5"/>
+            <feGaussianBlur stdDeviation="3" result="softMap"/>
+            <feDisplacementMap in="SourceGraphic" in2="softMap" scale="150" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+    </svg>
+
+    <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-5xl md:text-7xl font-bold mb-4">
+            <span class="highlight-text gradient-blue">数智生涯</span>
+        </h1>
+        <p class="text-xl md:text-2xl opacity-80 font-light">AI-Powered Career Planning & College Application Platform</p>
+    </div>
+
+    <div class="bento-grid">
+        <!-- Card 1: Hero -->
+        <div class="glass-card col-span-12 md:col-span-8 row-span-1 md:row-span-2 relative">
+            <div class="grid-element"></div>
+            <div class="flex flex-col justify-center h-full">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">重新定义<span class="highlight-text gradient-purple">生涯规划</span>与志愿填报</h2>
+                <p class="text-xl opacity-80 max-w-3xl">融合AI智能与多维度数据分析，为每位考生提供个性化生涯规划与高考志愿填报方案</p>
+            </div>
+            <div class="circle-element"></div>
+        </div>
+
+        <!-- Card 2: Feature 1 -->
+        <div class="glass-card col-span-6 md:col-span-4 row-span-1 relative">
+            <div class="feature-icon">
+                <i class="fas fa-brain"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-2">综合职业倾向指数</h3>
+            <p class="opacity-80">融合霍兰德职业兴趣、大五人格、能力倾向等多维度测评，生成个性化职业倾向模型</p>
+            <div class="absolute bottom-4 right-4">
+                <div class="big-number gradient-blue">01</div>
+            </div>
+        </div>
+
+        <!-- Card 3: Stats -->
+        <div class="glass-card col-span-6 md:col-span-4 row-span-1 relative">
+            <div class="flex justify-between items-center h-full">
+                <div>
+                    <div class="big-number gradient-green">97%</div>
+                    <p class="text-xl">用户满意度</p>
+                </div>
+                <div>
+                    <div class="big-number gradient-purple">86%</div>
+                    <p class="text-xl">志愿匹配度</p>
+                </div>
+            </div>
+            <div class="tech-element w-32 h-32 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-500/20 top-[-30px] right-[-30px]"></div>
+        </div>
+
+        <!-- Card 4: Feature 2 -->
+        <div class="glass-card col-span-6 md:col-span-4 row-span-1 relative">
+            <div class="feature-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-2">多方协同决策</h3>
+            <p class="opacity-80">AI智能调解学生、家长、教师意见，促进达成共识，优化家庭决策过程</p>
+            <div class="absolute bottom-4 right-4">
+                <div class="big-number gradient-blue">02</div>
+            </div>
+        </div>
+
+        <!-- Card 5: Chart -->
+        <div class="glass-card col-span-12 md:col-span-8 row-span-2 relative">
+            <h3 class="text-2xl font-bold mb-4">专业就业趋势分析</h3>
+            <div class="chart-container" id="trendChart"></div>
+        </div>
+
+        <!-- Card 6: Feature 3 -->
+        <div class="glass-card col-span-6 md:col-span-4 row-span-1 relative">
+            <div class="feature-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-2">职业发展预测</h3>
+            <p class="opacity-80">基于行业趋势数据分析，提供具有前瞻性的专业选择和职业发展建议</p>
+            <div class="absolute bottom-4 right-4">
+                <div class="big-number gradient-blue">03</div>
+            </div>
+        </div>
+
+        <!-- Card 7: Process -->
+        <div class="glass-card col-span-6 md:col-span-4 row-span-1 relative">
+            <h3 class="text-2xl font-bold mb-4">智能填报四步法</h3>
+            <div class="flex flex-wrap gap-4">
+                <div class="bg-white/10 p-3 rounded-xl backdrop-blur-sm">
+                    <div class="text-2xl gradient-blue font-bold">1</div>
+                    <p class="text-sm">多维测评</p>
+                </div>
+                <div class="bg-white/10 p-3 rounded-xl backdrop-blur-sm">
+                    <div class="text-2xl gradient-purple font-bold">2</div>
+                    <p class="text-sm">智能分析</p>
+                </div>
+                <div class="bg-white/10 p-3 rounded-xl backdrop-blur-sm">
+                    <div class="text-2xl gradient-green font-bold">3</div>
+                    <p class="text-sm">方案生成</p>
+                </div>
+                <div class="bg-white/10 p-3 rounded-xl backdrop-blur-sm">
+                    <div class="text-2xl gradient-blue font-bold">4</div>
+                    <p class="text-sm">协同决策</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 8: AI Agent -->
+        <div class="glass-card col-span-12 md:col-span-8 row-span-1 relative">
+            <div class="flex flex-col md:flex-row items-center h-full">
+                <div class="flex-1">
+                    <h3 class="text-3xl font-bold mb-2">AI智能体辅助决策</h3>
+                    <p class="text-lg opacity-80">模拟高考志愿填报专家思维模式，综合建模预测概率优势和个人需求</p>
+                </div>
+                <div class="mt-6 md:mt-0 md:ml-8">
+                    <div class="bg-gradient-to-br from-cyan-500/30 to-blue-500/30 p-6 rounded-2xl backdrop-blur-sm">
+                        <i class="fas fa-robot text-5xl gradient-blue"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 9: Advantage -->
+        <div class="glass-card col-span-6 md:col-span-4 row-span-1 relative">
+            <h3 class="text-2xl font-bold mb-4">核心优势</h3>
+            <ul class="space-y-2">
+                <li class="flex items-center">
+                    <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                    <span>个性化推荐算法</span>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                    <span>动态权重调整机制</span>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                    <span>语义理解与情感分析</span>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                    <span>职业发展前瞻预测</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8 text-center">
+        <div class="glass-card p-8 max-w-4xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">开启您的<span class="highlight-text gradient-blue">智能生涯规划</span>之旅</h2>
+            <button class="px-8 py-4 rounded-full font-bold text-lg bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 transition-all transform hover:scale-105">
+                免费体验 <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // 初始化趋势图表
+        const trendChart = echarts.init(document.getElementById('trendChart'));
+        
+        const option = {
+            backgroundColor: 'transparent',
+            tooltip: {
+                trigger: 'axis',
+                backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                borderColor: 'rgba(255, 255, 255, 0.2)',
+                textStyle: {
+                    color: '#fff'
+                },
+                axisPointer: {
+                    type: 'line',
+                    lineStyle: {
+                        color: 'rgba(255, 255, 255, 0.2)'
+                    }
+                }
+            },
+            legend: {
+                data: ['计算机科学', '人工智能', '金融经济', '生物医学', '教育学'],
+                textStyle: {
+                    color: '#fff'
+                },
+                right: 10,
+                top: 10
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                top: '20%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: ['2023', '2024', '2025', '2026', '2027', '2028', '2029'],
+                axisLine: {
+                    lineStyle: {
+                        color: 'rgba(255, 255, 255, 0.3)'
+                    }
+                },
+                axisLabel: {
+                    color: 'rgba(255, 255, 255, 0.7)'
+                }
+            },
+            yAxis: {
+                type: 'value',
+                name: '就业指数',
+                nameTextStyle: {
+                    color: 'rgba(255, 255, 255, 0.7)'
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: 'rgba(255, 255, 255, 0.3)'
+                    }
+                },
+                axisLabel: {
+                    color: 'rgba(255, 255, 255, 0.7)'
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: 'rgba(255, 255, 255, 0.1)'
+                    }
+                }
+            },
+            series: [
+                {
+                    name: '计算机科学',
+                    type: 'line',
+                    smooth: true,
+                    lineStyle: {
+                        width: 4,
+                        color: '#0ea5e9'
+                    },
+                    symbol: 'circle',
+                    symbolSize: 8,
+                    data: [78, 82, 85, 88, 90, 92, 93]
+                },
+                {
+                    name: '人工智能',
+                    type: 'line',
+                    smooth: true,
+                    lineStyle: {
+                        width: 4,
+                        color: '#8b5cf6'
+                    },
+                    symbol: 'circle',
+                    symbolSize: 8,
+                    data: [65, 75, 82, 88, 92, 95, 97]
+                },
+                {
+                    name: '金融经济',
+                    type: 'line',
+                    smooth: true,
+                    lineStyle: {
+                        width: 4,
+                        color: '#10b981'
+                    },
+                    symbol: 'circle',
+                    symbolSize: 8,
+                    data: [85, 87, 88, 86, 85, 84, 83]
+                },
+                {
+                    name: '生物医学',
+                    type: 'line',
+                    smooth: true,
+                    lineStyle: {
+                        width: 4,
+                        color: '#f59e0b'
+                    },
+                    symbol: 'circle',
+                    symbolSize: 8,
+                    data: [72, 76, 80, 83, 86, 88, 90]
+                },
+                {
+                    name: '教育学',
+                    type: 'line',
+                    smooth: true,
+                    lineStyle: {
+                        width: 4,
+                        color: '#ec4899'
+                    },
+                    symbol: 'circle',
+                    symbolSize: 8,
+                    data: [80, 81, 82, 83, 84, 85, 86]
+                }
+            ]
+        };
+        
+        trendChart.setOption(option);
+        
+        // 响应式调整
+        window.addEventListener('resize', function() {
+            trendChart.resize();
+        });
+    </script>
+</body>
+</html>

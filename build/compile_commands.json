@@ -1,0 +1,50 @@
+[
+{
+  "directory": "D:/projs/aaaakeshe/build",
+  "command": "C:\\ProgramData\\mingw64\\mingw64\\bin\\g++.exe -DFMT_SHARED @CMakeFiles/logger.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\logger.dir\\src\\arg_parser.cpp.obj -c D:\\projs\\aaaakeshe\\src\\arg_parser.cpp",
+  "file": "D:/projs/aaaakeshe/src/arg_parser.cpp",
+  "output": "CMakeFiles/logger.dir/src/arg_parser.cpp.obj"
+},
+{
+  "directory": "D:/projs/aaaakeshe/build",
+  "command": "C:\\ProgramData\\mingw64\\mingw64\\bin\\g++.exe -DFMT_SHARED @CMakeFiles/logger.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\logger.dir\\src\\console_sink.cpp.obj -c D:\\projs\\aaaakeshe\\src\\console_sink.cpp",
+  "file": "D:/projs/aaaakeshe/src/console_sink.cpp",
+  "output": "CMakeFiles/logger.dir/src/console_sink.cpp.obj"
+},
+{
+  "directory": "D:/projs/aaaakeshe/build",
+  "command": "C:\\ProgramData\\mingw64\\mingw64\\bin\\g++.exe -DFMT_SHARED @CMakeFiles/logger.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\logger.dir\\src\\file_sink.cpp.obj -c D:\\projs\\aaaakeshe\\src\\file_sink.cpp",
+  "file": "D:/projs/aaaakeshe/src/file_sink.cpp",
+  "output": "CMakeFiles/logger.dir/src/file_sink.cpp.obj"
+},
+{
+  "directory": "D:/projs/aaaakeshe/build",
+  "command": "C:\\ProgramData\\mingw64\\mingw64\\bin\\g++.exe -DFMT_SHARED @CMakeFiles/logger.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\logger.dir\\src\\log_level.cpp.obj -c D:\\projs\\aaaakeshe\\src\\log_level.cpp",
+  "file": "D:/projs/aaaakeshe/src/log_level.cpp",
+  "output": "CMakeFiles/logger.dir/src/log_level.cpp.obj"
+},
+{
+  "directory": "D:/projs/aaaakeshe/build",
+  "command": "C:\\ProgramData\\mingw64\\mingw64\\bin\\g++.exe -DFMT_SHARED @CMakeFiles/logger.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\logger.dir\\src\\log_manager.cpp.obj -c D:\\projs\\aaaakeshe\\src\\log_manager.cpp",
+  "file": "D:/projs/aaaakeshe/src/log_manager.cpp",
+  "output": "CMakeFiles/logger.dir/src/log_manager.cpp.obj"
+},
+{
+  "directory": "D:/projs/aaaakeshe/build",
+  "command": "C:\\ProgramData\\mingw64\\mingw64\\bin\\g++.exe -DFMT_SHARED @CMakeFiles/logger.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\logger.dir\\src\\sink.cpp.obj -c D:\\projs\\aaaakeshe\\src\\sink.cpp",
+  "file": "D:/projs/aaaakeshe/src/sink.cpp",
+  "output": "CMakeFiles/logger.dir/src/sink.cpp.obj"
+},
+{
+  "directory": "D:/projs/aaaakeshe/build",
+  "command": "C:\\ProgramData\\mingw64\\mingw64\\bin\\g++.exe  @CMakeFiles/demo.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\demo.dir\\examples\\test.cpp.obj -c D:\\projs\\aaaakeshe\\examples\\test.cpp",
+  "file": "D:/projs/aaaakeshe/examples/test.cpp",
+  "output": "CMakeFiles/demo.dir/examples/test.cpp.obj"
+},
+{
+  "directory": "D:/projs/aaaakeshe/build",
+  "command": "C:\\ProgramData\\mingw64\\mingw64\\bin\\g++.exe  @CMakeFiles/analyser.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\analyser.dir\\examples\\analyser.cpp.obj -c D:\\projs\\aaaakeshe\\examples\\analyser.cpp",
+  "file": "D:/projs/aaaakeshe/examples/analyser.cpp",
+  "output": "CMakeFiles/analyser.dir/examples/analyser.cpp.obj"
+}
+]
